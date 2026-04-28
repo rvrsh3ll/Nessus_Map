@@ -59,12 +59,15 @@
         .finding-item.is-checked {
             display: none;
         }
-        .checked-findings-panel {
-            padding: 12px 16px;
+        .checked-findings-header {
+            align-items: center;
+            justify-content: space-between;
         }
         .checked-findings-title {
             font-weight: 600;
-            margin-bottom: 8px;
+        }
+        .checked-findings-icon {
+            margin-right: 0;
         }
         #checked-findings-list .chip {
             margin-right: 6px;
@@ -86,19 +89,26 @@
         </div>
         <div class="row" id="checked-findings-bar" {% if not checked_items %}style="display: none;"{% endif %}>
             <div class="col l12">
-                <div class="card-panel grey lighten-4 checked-findings-panel">
-                    <div class="checked-findings-title">
-                        Checked Findings <span id="checked-count">({{ checked_items|length }})</span>
-                    </div>
-                    <div id="checked-findings-list">
-                        {% for item in checked_items %}
-                            <div class="chip checked-chip" data-plugin-id="{{ item.plugin_id }}">
-                                {{ item.name }} ({{ item.plugin_id }})
-                                <i class="close material-icons">close</i>
+                <ul class="collapsible">
+                    <li>
+                        <div class="collapsible-header checked-findings-header">
+                            <span class="checked-findings-title">
+                                Checked Findings <span id="checked-count">({{ checked_items|length }})</span>
+                            </span>
+                            <i class="material-icons checked-findings-icon">expand_more</i>
+                        </div>
+                        <div class="collapsible-body grey lighten-4">
+                            <div id="checked-findings-list">
+                                {% for item in checked_items %}
+                                    <div class="chip checked-chip" data-plugin-id="{{ item.plugin_id }}">
+                                        {{ item.name }} ({{ item.plugin_id }})
+                                        <i class="close material-icons">close</i>
+                                    </div>
+                                {% endfor %}
                             </div>
-                        {% endfor %}
-                    </div>
-                </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="row">
